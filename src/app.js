@@ -9,6 +9,9 @@ const viewsPath = path.join(__dirname, "../templates/views");
 const partialsPath = path.join(__dirname, "../templates/partials");
 const app = express();
 
+// set up heroku port
+const port = process.env.PORT || 3001;
+
 // app.use() is a way to customize your folder on express
 
 // the set method tells us which templating engine to use with our express
@@ -69,7 +72,7 @@ app.get("/weather", (req, res) => {
     forecast(latitude, longitude, (error, forecastData) => {
       if (error) {
         return res.send({
-          error:error,
+          error: error,
         });
       }
 
@@ -111,6 +114,6 @@ app.get("*", (req, res) => {
     name: "devPro Inc.",
   });
 });
-app.listen(3001, () => {
-  console.log("Server is up on port 3001");
+app.listen(port, () => {
+  console.log("Server is up on port" + port);
 });
